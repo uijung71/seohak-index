@@ -10,13 +10,14 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import re
 import json
 import yfinance as yf
 
 # ── Configuration ──────────────────────────────────────────────
 st.set_page_config(page_title="서학 100 대시보드 V12.0", page_icon="⚡", layout="wide")
+KST = timezone(timedelta(hours=9))
 
 BASE = 1000                          # Normalization base for chart
 REPORT_HEIGHT = 433                   # AI report card height (px)
@@ -172,7 +173,7 @@ def render_header(last, prev, live_data):
     chg_krw = calc_change_pct(last['index_point_krw'], prev['index_point_krw'])
     date_str = last['date'].strftime('%m/%d')
 
-    st.markdown(f'<div class="date-info">데이터 기준일: {last["date"].strftime("%Y-%m-%d")} | 업데이트: {datetime.now().strftime("%Y-%m-%d %H:%M")}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="date-info">데이터 기준일: {last["date"].strftime("%Y-%m-%d")} | 업데이트: {datetime.now(KST).strftime("%Y-%m-%d %H:%M")}</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">⚡ 서학 100 지수 실시간 대시보드</div>', unsafe_allow_html=True)
 
     cols = st.columns(5)
