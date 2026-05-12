@@ -257,16 +257,25 @@ def render_chart(df_index, df_bench):
     """Render performance comparison chart with MA overlays."""
     st.markdown('<div class="section-header">📈 지수 성과 비교 및 기술적 분석</div>', unsafe_allow_html=True)
 
-    c = st.columns([1.5, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8])
-    with c[0]: period = st.selectbox("기간", list(PERIOD_DAYS.keys()), label_visibility="collapsed")
-    with c[1]: sw_usd = st.checkbox("서학(USD)", True)
-    with c[2]: sw_krw = st.checkbox("서학(KRW)", False)
-    with c[3]: sw_ma20 = st.checkbox("20일선", False)
-    with c[4]: sw_ma60 = st.checkbox("60일선", False)
-    bm_switches = {}
-    for i, bm in enumerate(BENCHMARKS):
-        with c[5 + i]:
-            bm_switches[bm['col']] = st.checkbox(bm['name'][:3], i == 0)  # Default: first benchmark ON
+    # Compact controls: period selector + multi-select for indices/MAs
+    INDEX_OPTIONS = ['서학(USD)', '서학(KRW)', '20일선', '60일선', '나스닥', 'S&P', '코스피']
+    DEFAULT_ON = ['서학(USD)', '나스닥']
+
+    c1, c2 = st.columns([1, 2.5])
+    with c1:
+        period = st.selectbox("기간", list(PERIOD_DAYS.keys()), label_visibility="collapsed")
+    with c2:
+        selected = st.multiselect("지수 선택", INDEX_OPTIONS, default=DEFAULT_ON, label_visibility="collapsed")
+
+    sw_usd = '서학(USD)' in selected
+    sw_krw = '서학(KRW)' in selected
+    sw_ma20 = '20일선' in selected
+    sw_ma60 = '60일선' in selected
+    bm_switches = {
+        'NDX': '나스닥' in selected,
+        'GSPC': 'S&P' in selected,
+        'KS11': '코스피' in selected,
+    }
 
     cutoff = df_index['date'].max() - timedelta(days=PERIOD_DAYS[period])
     df_p = df_index[df_index['date'] >= cutoff].sort_values('date')
