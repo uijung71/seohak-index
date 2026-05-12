@@ -1,0 +1,17 @@
+# Dependencies
+.env
+__pycache__/
+*.pyc
+
+# Snapshots (too large for GitHub)
+data/raw/snapshots/
+
+# Temp files
+*.tmp
+~$*
+.DS_Store
+Thumbs.db
+
+# Scratch/test files
+scratch/
+test_*.py
