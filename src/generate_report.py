@@ -1,13 +1,15 @@
 """
 서학 100 AI 일일 시장분석 리포트 생성기
 - Gemini API를 사용하여 당일 시장 데이터 기반 리포트 자동 생성
+- 벤치마크 지수(나스닥/S&P/코스피) 자동 업데이트
 - 하루 1회 파이프라인 실행 시 호출
 - 결과는 output/daily_report.json에 저장
 """
 import json
 import pandas as pd
+import requests
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
 from google import genai
@@ -20,9 +22,41 @@ WEIGHTS_FILE = Path("data/processed/weights_daily_live.csv")
 RETURNS_FILE = Path("data/processed/daily_returns_live.csv")
 INDEX_FILE = Path("output/seohak100_daily_index.csv")
 TICKER_MAP_FILE = Path("data/processed/ticker_korean_map.csv")
+BENCHMARK_FILE = Path("data/raw/benchmark_indices.csv")
 REPORT_OUTPUT = Path("output/daily_report.json")
 
 MODEL_NAME = "gemini-2.5-flash"
+EODHD_API_KEY = "693abf5882dab9.42616862"
+BENCHMARK_SYMBOLS = ['NDX', 'GSPC', 'KS11']
+
+
+def update_benchmarks():
+    """Fetch latest benchmark index data from EODHD and update CSV."""
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] Benchmark update...")
+    if not BENCHMARK_FILE.exists():
+        return
+    df = pd.read_csv(BENCHMARK_FILE)
+    df['date'] = pd.to_datetime(df['date'])
+    from_date = (datetime.now() - timedelta(days=10)).strftime('%Y-%m-%d')
+
+    for sym in BENCHMARK_SYMBOLS:
+        try:
+            url = f"https://eodhd.com/api/eod/{sym}.INDX?api_token={EODHD_API_KEY}&fmt=json&from={from_date}"
+            data = pd.DataFrame(requests.get(url, timeout=10).json())
+            data['date'] = pd.to_datetime(data['date'])
+            for _, row in data.iterrows():
+                mask = df['date'] == row['date']
+                if mask.any():
+                    df.loc[mask, sym] = row['close']
+                else:
+                    df = pd.concat([df, pd.DataFrame([{'date': row['date'], sym: row['close']}])], ignore_index=True)
+            print(f"  {sym}: OK ({len(data)} rows)")
+        except Exception as e:
+            print(f"  {sym}: FAILED ({e})")
+
+    df = df.sort_values('date').drop_duplicates('date', keep='last')
+    df.to_csv(BENCHMARK_FILE, index=False)
+
 
 
 def load_ticker_map():
@@ -103,7 +137,10 @@ def build_prompt(index_data, top5, top10_up, top10_down, chg_pct, ticker_map):
 
 def generate_report():
     """Generate daily AI market analysis report."""
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] 일일 AI 리포트 생성 시작...")
+    # Update benchmark indices first
+    update_benchmarks()
+
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] AI report generation...")
 
     # Load data
     ticker_map = load_ticker_map()
