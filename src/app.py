@@ -78,11 +78,26 @@ def inject_css():
         margin-bottom: 25px !important; margin-top: 45px !important;
     }
     .date-info { font-size: 1rem; color: #aaa; text-align: right; margin-bottom: -40px; padding-right: 15px; }
-    [data-testid="stMetric"] {
-        background: linear-gradient(145deg, #23273a, #1e2130);
-        border-radius: 20px !important; padding: 20px !important;
-        border: 1px solid rgba(255,255,255,0.08) !important;
+
+    /* ── Custom Metric Cards (replaces st.metric) ──── */
+    .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+        margin-bottom: 10px;
     }
+    .metric-card {
+        background: linear-gradient(145deg, #23273a, #1e2130);
+        border-radius: 16px; padding: 16px 14px;
+        border: 1px solid rgba(255,255,255,0.08);
+        text-align: left;
+    }
+    .metric-label { font-size: 0.8rem; color: #aaa; margin-bottom: 4px; white-space: nowrap; }
+    .metric-value { font-size: 1.6rem; font-weight: 800; color: #fff; white-space: nowrap; }
+    .metric-delta { font-size: 0.85rem; font-weight: 600; margin-top: 2px; }
+    .delta-up { color: #ff4b4b; }
+    .delta-down { color: #4b91ff; }
+
     .status-card {
         background: rgba(255,255,255,0.04); backdrop-filter: blur(12px);
         border-radius: 28px; padding: 25px; border: 1px solid rgba(255,255,255,0.1);
@@ -102,29 +117,13 @@ def inject_css():
         .section-header { font-size: 1.2rem !important; margin-top: 15px !important; margin-bottom: 10px !important; }
         .date-info { font-size: 0.7rem !important; margin-bottom: -15px !important; }
 
-        /* Metric cards - NO overflow hidden so values display fully */
-        [data-testid="stMetric"] {
-            padding: 6px 6px !important; border-radius: 10px !important;
-            min-width: 0 !important;
-        }
-        [data-testid="stMetric"] label,
-        [data-testid="stMetric"] [data-testid="stMetricLabel"],
-        [data-testid="stMetric"] [data-testid="stMetricLabel"] p {
-            font-size: 0.5rem !important; min-height: auto !important;
-            line-height: 1.2 !important;
-            white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
-        }
-        [data-testid="stMetric"] [data-testid="stMetricValue"],
-        [data-testid="stMetric"] [data-testid="stMetricValue"] div {
-            font-size: 0.78rem !important; line-height: 1.2 !important;
-            white-space: nowrap !important;
-        }
-        [data-testid="stMetric"] [data-testid="stMetricDelta"],
-        [data-testid="stMetric"] [data-testid="stMetricDelta"] div {
-            font-size: 0.55rem !important;
-        }
+        .metric-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .metric-card { padding: 10px 8px; border-radius: 12px; }
+        .metric-label { font-size: 0.6rem; }
+        .metric-value { font-size: 1.1rem; }
+        .metric-delta { font-size: 0.65rem; }
 
-        /* Chart controls - stack for mobile */
+        /* Chart controls */
         [data-testid="stHorizontalBlock"] [data-testid="stCheckbox"] label span {
             font-size: 0.7rem !important;
         }
@@ -137,19 +136,11 @@ def inject_css():
     }
     @media (max-width: 480px) {
         .section-header { font-size: 1rem !important; }
-        [data-testid="stMetric"] { padding: 4px 4px !important; }
-        [data-testid="stMetric"] label,
-        [data-testid="stMetric"] [data-testid="stMetricLabel"] p {
-            font-size: 0.42rem !important;
-        }
-        [data-testid="stMetric"] [data-testid="stMetricValue"],
-        [data-testid="stMetric"] [data-testid="stMetricValue"] div {
-            font-size: 0.68rem !important;
-        }
-        [data-testid="stMetric"] [data-testid="stMetricDelta"],
-        [data-testid="stMetric"] [data-testid="stMetricDelta"] div {
-            font-size: 0.48rem !important;
-        }
+        .metric-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .metric-card { padding: 8px 6px; border-radius: 10px; }
+        .metric-label { font-size: 0.52rem; }
+        .metric-value { font-size: 0.95rem; }
+        .metric-delta { font-size: 0.58rem; }
         .status-card { font-size: 0.75rem !important; }
     }
     </style>""", unsafe_allow_html=True)
@@ -223,8 +214,26 @@ def get_live_indices():
 
 
 # ── UI Section Renderers ───────────────────────────────────────
+def _metric_card_html(label, value, delta_str):
+    """Generate a single metric card as HTML."""
+    try:
+        delta_val = float(delta_str.replace('%', '').replace('+', ''))
+        delta_class = 'delta-down' if delta_val < 0 else 'delta-up'
+        arrow = '▲' if delta_val >= 0 else '▼'
+        delta_display = f"{arrow} {delta_str}"
+    except (ValueError, AttributeError):
+        delta_class = 'delta-down'
+        delta_display = delta_str
+    return (
+        f'<div class="metric-card">'
+        f'<div class="metric-label">{label}</div>'
+        f'<div class="metric-value">{value}</div>'
+        f'<div class="metric-delta {delta_class}">{delta_display}</div>'
+        f'</div>'
+    )
+
 def render_header(last, prev, live_data):
-    """Render top metrics bar."""
+    """Render top metrics bar using custom HTML cards."""
     chg_usd = calc_change_pct(last['index_point_usd'], prev['index_point_usd'])
     chg_krw = calc_change_pct(last['index_point_krw'], prev['index_point_krw'])
     date_str = last['date'].strftime('%m/%d')
@@ -232,15 +241,16 @@ def render_header(last, prev, live_data):
     st.markdown(f'<div class="date-info">데이터 기준일: {last["date"].strftime("%Y-%m-%d")} | 업데이트: {datetime.now(KST).strftime("%Y-%m-%d %H:%M")}</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-header">⚡ 서학 100 지수 실시간 대시보드</div>', unsafe_allow_html=True)
 
-    cols = st.columns(5)
-    with cols[0]: st.metric(f"서학 USD ({date_str})", f"{last['index_point_usd']:,.0f}", f"{chg_usd:+.2f}%")
-    with cols[1]: st.metric(f"서학 KRW ({date_str})", f"{last['index_point_krw']:,.0f}", f"{chg_krw:+.2f}%")
-    for i, bm in enumerate(BENCHMARKS):
+    cards_html = '<div class="metric-grid">'
+    cards_html += _metric_card_html(f"서학 USD ({date_str})", f"{last['index_point_usd']:,.0f}", f"{chg_usd:+.2f}%")
+    cards_html += _metric_card_html(f"서학 KRW ({date_str})", f"{last['index_point_krw']:,.0f}", f"{chg_krw:+.2f}%")
+    for bm in BENCHMARKS:
         d = live_data.get(bm['name'], {})
         bm_date = d.get('date', '-')
-        with cols[i + 2]:
-            val = d.get('val', 0)
-            st.metric(f"{bm['name']} ({bm_date})", f"{val:,.0f}", d.get('delta', '-'))
+        val = d.get('val', 0)
+        cards_html += _metric_card_html(f"{bm['name']} ({bm_date})", f"{val:,.0f}", d.get('delta', '-'))
+    cards_html += '</div>'
+    st.markdown(cards_html, unsafe_allow_html=True)
 
 
 def render_chart(df_index, df_bench):
