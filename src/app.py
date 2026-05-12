@@ -102,16 +102,32 @@ def inject_css():
         .section-header { font-size: 1.2rem !important; margin-top: 15px !important; margin-bottom: 10px !important; }
         .date-info { font-size: 0.7rem !important; margin-bottom: -15px !important; }
 
-        /* Metric cards */
-        [data-testid="stMetric"] { padding: 8px 10px !important; border-radius: 12px !important; }
-        [data-testid="stMetric"] label { font-size: 0.55rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricLabel"] { font-size: 0.55rem !important; min-height: auto !important; }
-        [data-testid="stMetric"] [data-testid="stMetricLabel"] p { font-size: 0.55rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricValue"] { font-size: 0.9rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricValue"] div { font-size: 0.9rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricDelta"] { font-size: 0.6rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricDelta"] div { font-size: 0.6rem !important; }
-        [data-testid="stMetric"] * { overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; }
+        /* Metric cards - NO overflow hidden so values display fully */
+        [data-testid="stMetric"] {
+            padding: 6px 6px !important; border-radius: 10px !important;
+            min-width: 0 !important;
+        }
+        [data-testid="stMetric"] label,
+        [data-testid="stMetric"] [data-testid="stMetricLabel"],
+        [data-testid="stMetric"] [data-testid="stMetricLabel"] p {
+            font-size: 0.5rem !important; min-height: auto !important;
+            line-height: 1.2 !important;
+            white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
+        }
+        [data-testid="stMetric"] [data-testid="stMetricValue"],
+        [data-testid="stMetric"] [data-testid="stMetricValue"] div {
+            font-size: 0.78rem !important; line-height: 1.2 !important;
+            white-space: nowrap !important;
+        }
+        [data-testid="stMetric"] [data-testid="stMetricDelta"],
+        [data-testid="stMetric"] [data-testid="stMetricDelta"] div {
+            font-size: 0.55rem !important;
+        }
+
+        /* Chart controls - stack for mobile */
+        [data-testid="stHorizontalBlock"] [data-testid="stCheckbox"] label span {
+            font-size: 0.7rem !important;
+        }
 
         /* Report card */
         .status-card { padding: 15px !important; border-radius: 16px !important; font-size: 0.82rem !important; height: auto !important; }
@@ -121,11 +137,19 @@ def inject_css():
     }
     @media (max-width: 480px) {
         .section-header { font-size: 1rem !important; }
-        [data-testid="stMetric"] label { font-size: 0.48rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricLabel"] p { font-size: 0.48rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricValue"] { font-size: 0.75rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricValue"] div { font-size: 0.75rem !important; }
-        [data-testid="stMetric"] [data-testid="stMetricDelta"] div { font-size: 0.5rem !important; }
+        [data-testid="stMetric"] { padding: 4px 4px !important; }
+        [data-testid="stMetric"] label,
+        [data-testid="stMetric"] [data-testid="stMetricLabel"] p {
+            font-size: 0.42rem !important;
+        }
+        [data-testid="stMetric"] [data-testid="stMetricValue"],
+        [data-testid="stMetric"] [data-testid="stMetricValue"] div {
+            font-size: 0.68rem !important;
+        }
+        [data-testid="stMetric"] [data-testid="stMetricDelta"],
+        [data-testid="stMetric"] [data-testid="stMetricDelta"] div {
+            font-size: 0.48rem !important;
+        }
         .status-card { font-size: 0.75rem !important; }
     }
     </style>""", unsafe_allow_html=True)
@@ -209,12 +233,14 @@ def render_header(last, prev, live_data):
     st.markdown('<div class="section-header">⚡ 서학 100 지수 실시간 대시보드</div>', unsafe_allow_html=True)
 
     cols = st.columns(5)
-    with cols[0]: st.metric(f"서학 100 (USD) {date_str}", f"{last['index_point_usd']:,.2f}", f"{chg_usd:+.2f}%")
-    with cols[1]: st.metric(f"서학 100 (KRW) {date_str}", f"{last['index_point_krw']:,.2f}", f"{chg_krw:+.2f}%")
+    with cols[0]: st.metric(f"서학 USD ({date_str})", f"{last['index_point_usd']:,.0f}", f"{chg_usd:+.2f}%")
+    with cols[1]: st.metric(f"서학 KRW ({date_str})", f"{last['index_point_krw']:,.0f}", f"{chg_krw:+.2f}%")
     for i, bm in enumerate(BENCHMARKS):
         d = live_data.get(bm['name'], {})
+        bm_date = d.get('date', '-')
         with cols[i + 2]:
-            st.metric(f"{bm['name']} ({d.get('date', '-')})", f"{d.get('val', 0):,.1f}", d.get('delta', '-'))
+            val = d.get('val', 0)
+            st.metric(f"{bm['name']} ({bm_date})", f"{val:,.0f}", d.get('delta', '-'))
 
 
 def render_chart(df_index, df_bench):
