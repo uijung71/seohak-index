@@ -99,23 +99,34 @@ def inject_css():
 
     /* ── Mobile Responsive ─────────────────────────── */
     @media (max-width: 768px) {
-        .section-header { font-size: 1.3rem !important; margin-top: 20px !important; margin-bottom: 15px !important; }
-        .date-info { font-size: 0.75rem; margin-bottom: -20px; }
-        [data-testid="stMetric"] { padding: 10px !important; border-radius: 12px !important; }
-        [data-testid="stMetricLabel"] { font-size: 0.7rem !important; }
-        [data-testid="stMetricValue"] { font-size: 1.1rem !important; }
-        [data-testid="stMetricDelta"] { font-size: 0.7rem !important; }
-        .status-card { padding: 15px; border-radius: 16px; font-size: 0.85rem; height: auto !important; }
-        .report-title { font-size: 1.05rem; }
-        .sub-title { font-size: 0.9rem; }
-        [data-testid="stDataFrame"] { font-size: 0.75rem !important; }
+        .section-header { font-size: 1.2rem !important; margin-top: 15px !important; margin-bottom: 10px !important; }
+        .date-info { font-size: 0.7rem !important; margin-bottom: -15px !important; }
+
+        /* Metric cards */
+        [data-testid="stMetric"] { padding: 8px 10px !important; border-radius: 12px !important; }
+        [data-testid="stMetric"] label { font-size: 0.55rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricLabel"] { font-size: 0.55rem !important; min-height: auto !important; }
+        [data-testid="stMetric"] [data-testid="stMetricLabel"] p { font-size: 0.55rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricValue"] { font-size: 0.9rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricValue"] div { font-size: 0.9rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricDelta"] { font-size: 0.6rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricDelta"] div { font-size: 0.6rem !important; }
+        [data-testid="stMetric"] * { overflow: hidden !important; text-overflow: ellipsis !important; white-space: nowrap !important; }
+
+        /* Report card */
+        .status-card { padding: 15px !important; border-radius: 16px !important; font-size: 0.82rem !important; height: auto !important; }
+        .report-title { font-size: 1rem !important; }
+        .sub-title { font-size: 0.85rem !important; }
+        [data-testid="stDataFrame"] { font-size: 0.72rem !important; }
     }
     @media (max-width: 480px) {
-        .section-header { font-size: 1.1rem !important; }
-        [data-testid="stMetricLabel"] { font-size: 0.6rem !important; }
-        [data-testid="stMetricValue"] { font-size: 0.95rem !important; }
-        [data-testid="stMetricDelta"] { font-size: 0.6rem !important; }
-        .status-card { font-size: 0.8rem; }
+        .section-header { font-size: 1rem !important; }
+        [data-testid="stMetric"] label { font-size: 0.48rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricLabel"] p { font-size: 0.48rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricValue"] { font-size: 0.75rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricValue"] div { font-size: 0.75rem !important; }
+        [data-testid="stMetric"] [data-testid="stMetricDelta"] div { font-size: 0.5rem !important; }
+        .status-card { font-size: 0.75rem !important; }
     }
     </style>""", unsafe_allow_html=True)
 
