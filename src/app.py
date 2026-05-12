@@ -96,6 +96,27 @@ def inject_css():
     .highlight-up { color: #ff4b4b; font-weight: 700; }
     .highlight-down { color: #4b91ff; font-weight: 700; }
     [data-testid="stDataFrame"] { font-size: 0.88rem !important; }
+
+    /* ── Mobile Responsive ─────────────────────────── */
+    @media (max-width: 768px) {
+        .section-header { font-size: 1.3rem !important; margin-top: 20px !important; margin-bottom: 15px !important; }
+        .date-info { font-size: 0.75rem; margin-bottom: -20px; }
+        [data-testid="stMetric"] { padding: 10px !important; border-radius: 12px !important; }
+        [data-testid="stMetricLabel"] { font-size: 0.7rem !important; }
+        [data-testid="stMetricValue"] { font-size: 1.1rem !important; }
+        [data-testid="stMetricDelta"] { font-size: 0.7rem !important; }
+        .status-card { padding: 15px; border-radius: 16px; font-size: 0.85rem; height: auto !important; }
+        .report-title { font-size: 1.05rem; }
+        .sub-title { font-size: 0.9rem; }
+        [data-testid="stDataFrame"] { font-size: 0.75rem !important; }
+    }
+    @media (max-width: 480px) {
+        .section-header { font-size: 1.1rem !important; }
+        [data-testid="stMetricLabel"] { font-size: 0.6rem !important; }
+        [data-testid="stMetricValue"] { font-size: 0.95rem !important; }
+        [data-testid="stMetricDelta"] { font-size: 0.6rem !important; }
+        .status-card { font-size: 0.8rem; }
+    }
     </style>""", unsafe_allow_html=True)
 
 
