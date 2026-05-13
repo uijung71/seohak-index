@@ -39,14 +39,20 @@ PERIOD_DAYS = {"최근 1개월": 30, "최근 3개월": 90, "최근 6개월": 180
 
 # ── Sector Classification Rules ────────────────────────────────
 SECTOR_RULES = [
-    (['SOXL','TQQQ','LABU','NVDL','BITX','CONL','TSLL','FNGU','BULZ'], '🚀 고레버리지 ETF'),
-    (['SOXS','SQQQ'], '📉 인버스/헤지'),
-    (['NVDA','TSLA','AAPL','MSFT','AMZN','GOOG','META','AVGO','ARM','ORCL','AMD','NFLX'], '💻 빅테크 & AI'),
-    (['MU','SMH','SOXX','LRCX','AMAT','ASML','INTC','QCOM','KLAC'], '🔌 반도체 장비/설계'),
-    (['TLT','TMF','EDV','IBIT','BITO','GLD','GDX','SIL','IAU'], '🏦 채권/금/암호화폐'),
-    (['LLY','NVO','UNH','JNJ','ABBV','MRK','PFE'], '🏥 헬스케어/바이오'),
-    (['WMT','PG','KO','PEP','MCD','NKE','SBUX','DIS','HD','V','MA'], '🛒 소비재 & 금융'),
-    (['NEE','XOM','CVX','AMT','PLD','O'], '🔋 에너지/리츠'),
+    (['SOXL','TQQQ','TSLL','NVDL','BITU','BITX','SSO','UPRO','QLD','PLTU','SNDU','KORU'], '🚀 레버리지/테마 ETF'),
+    (['QQQ','QQQM','SPY','VOO','SPLG','VTI','IVV','BOXX'], '📊 패시브 인덱스'),
+    (['SCHD','JEPI','JEPQ','QYLD','SGOV'], '💰 배당/인컴 ETF'),
+    (['SMH','SOXX','METV'], '🔌 반도체/테크 ETF'),
+    (['NVDA','TSLA','AAPL','MSFT','AMZN','GOOG','GOOGL','META','AVGO','ARM','ORCL','AMD','NFLX','TSM','SNPS','COST','CPNG','PLTR'], '💻 빅테크 & AI'),
+    (['MU','INTC','QCOM','AMAT','ASML','COHR','LITE','AAOI','VRT'], '🔌 반도체/장비'),
+    (['IONQ','QBTS','RGTI'], '⚛️ 양자컴퓨팅'),
+    (['RKLB','JOBY','RDW','ASTS','BA'], '🚀 우주/방산'),
+    (['SMR','OKLO','BE','PLUG','GEV','OXY','IREN','NVD'], '⚡ 에너지/원자력'),
+    (['MSTR','COIN','BITO','IBIT'], '₿ 암호화폐'),
+    (['TLT','GLD','SLV'], '🏦 채권/금/은'),
+    (['LLY','NVO','UNH','JNJ','PFE','RXRX','TEM'], '🏥 헬스케어/바이오'),
+    (['KO','NKE','JPM','HOOD','GRAB','BRK.A','BRK.B','O'], '🛒 소비재/금융'),
+    (['CRWV','CRCL','BMNR','BIMI','LAES','MUU','SNDK','PLUG'], '📦 기타 전략 종목'),
 ]
 
 # ── AI Report (loaded from daily_report.json) ─────────────────
@@ -163,9 +169,9 @@ def get_korean_name(ticker, ticker_map):
 
 def classify_sector(ticker):
     """Classify ticker into premium sector category."""
-    t = str(ticker).upper()
+    t = re.sub(r'[^A-Z0-9]', '', str(ticker).split('.')[0].strip().upper())
     for keywords, label in SECTOR_RULES:
-        if any(k in t for k in keywords):
+        if t in keywords:
             return label
     return '📦 기타 전략 종목'
 
