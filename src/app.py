@@ -194,11 +194,31 @@ def load_csv(path):
         return df
     return pd.DataFrame()
 
+def _fetch_kospi_naver():
+    """Fetch real-time KOSPI data from Naver Finance API (no delay)."""
+    import requests as req
+    try:
+        r = req.get('https://m.stock.naver.com/api/index/KOSPI/basic',
+                     headers={'User-Agent': 'Mozilla/5.0'}, timeout=5)
+        d = r.json()
+        val = float(d.get('closePrice', '0').replace(',', ''))
+        delta = float(d.get('fluctuationsRatio', '0'))
+        return {"val": val, "delta": f"{delta:+.2f}%", "date": datetime.now(KST).strftime('%m/%d')}
+    except Exception:
+        return None
+
 @st.cache_data(ttl=600)
 def get_live_indices():
-    """Fetch real-time benchmark index data via yfinance."""
+    """Fetch real-time benchmark index data. KOSPI uses Naver API, others use yfinance."""
     result = {}
     for bm in BENCHMARKS:
+        # Use Naver API for KOSPI (yfinance has 1-2 day delay for Korean market)
+        if bm['col'] == 'KS11':
+            kospi = _fetch_kospi_naver()
+            if kospi:
+                result[bm['name']] = kospi
+                continue
+
         try:
             hist = yf.Ticker(bm['yf']).history(period="5d")
             # Filter out rows with Close=0 (happens during market hours before data)
@@ -211,7 +231,6 @@ def get_live_indices():
                     "date": hist.index[-1].strftime('%m/%d'),
                 }
             elif len(hist) == 1:
-                # Only 1 valid data point (e.g. after long holiday)
                 result[bm['name']] = {
                     "val": hist['Close'].iloc[-1],
                     "delta": "-",
