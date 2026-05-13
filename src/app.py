@@ -99,7 +99,7 @@ def inject_css():
         border: 1px solid rgba(255,255,255,0.08);
         text-align: left;
     }
-    .metric-label { font-size: 0.8rem; color: #aaa; margin-bottom: 4px; white-space: nowrap; }
+    .metric-label { font-size: 0.85rem; color: #00d4ff; font-weight: 700; margin-bottom: 4px; white-space: nowrap; }
     .metric-value { font-size: 1.6rem; font-weight: 800; color: #fff; white-space: nowrap; }
     .metric-delta { font-size: 0.85rem; font-weight: 600; margin-top: 2px; }
     .delta-up { color: #ff4b4b; }
