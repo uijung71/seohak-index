@@ -26,6 +26,7 @@ PORTFOLIO_HEIGHT = 530                # Portfolio section height (px)
 MA_WINDOWS = [20, 60]                 # Moving average periods
 
 # ── File Paths ─────────────────────────────────────────────────
+BANNER_FILE = Path("assets/banner.png")
 INDEX_FILE = Path("output/seohak100_daily_index.csv")
 WEIGHTS_FILE = Path("data/processed/weights_daily_live.csv")
 RETURNS_FILE = Path("data/processed/daily_returns_live.csv")
@@ -268,8 +269,10 @@ def render_header(last, prev, live_data):
     chg_krw = calc_change_pct(last['index_point_krw'], prev['index_point_krw'])
     date_str = last['date'].strftime('%m/%d')
 
+    # Banner image
+    if BANNER_FILE.exists():
+        st.image(str(BANNER_FILE), use_container_width=True)
     st.markdown(f'<div class="date-info">데이터 기준일: {last["date"].strftime("%Y-%m-%d")} | 업데이트: {datetime.now(KST).strftime("%Y-%m-%d %H:%M")}</div>', unsafe_allow_html=True)
-    st.markdown('<div class="section-header">⚡ 서학 100 지수 실시간 대시보드</div>', unsafe_allow_html=True)
 
     cards_html = '<div class="metric-grid">'
     cards_html += _metric_card_html(f"서학 USD ({date_str})", f"{last['index_point_usd']:,.0f}", f"{chg_usd:+.2f}%")
