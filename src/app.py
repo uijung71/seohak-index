@@ -296,15 +296,18 @@ def render_chart(df_index, df_bench):
     """Render performance comparison chart with MA overlays."""
     st.markdown('<div class="section-header">📈 지수 성과 비교 및 기술적 분석</div>', unsafe_allow_html=True)
 
-    # All controls in one row: Period | Indices | Moving Averages
-    c1, c2, c3 = st.columns([1, 2, 1.5])
-    with c1:
-        period = st.selectbox("조회 기간", list(PERIOD_DAYS.keys()))
-    with c2:
-        indices = st.multiselect("비교지수", ['서학(USD)', '서학(KRW)', '나스닥', 'S&P', '코스피'],
-                                 default=['서학(USD)', '나스닥'])
-    with c3:
-        ma_options = st.multiselect("이동평균선", ['20일선', '60일선'], default=[])
+    # Initialize session state defaults (chart renders first, controls below)
+    if 'chart_period' not in st.session_state:
+        st.session_state.chart_period = '최근 1개월'
+    if 'chart_indices' not in st.session_state:
+        st.session_state.chart_indices = ['서학(USD)', '나스닥', 'S&P', '코스피']
+    if 'chart_ma' not in st.session_state:
+        st.session_state.chart_ma = []
+
+    # Read current settings
+    period = st.session_state.chart_period
+    indices = st.session_state.chart_indices
+    ma_options = st.session_state.chart_ma
 
     sw_usd = '서학(USD)' in indices
     sw_krw = '서학(KRW)' in indices
@@ -359,6 +362,16 @@ def render_chart(df_index, df_bench):
         paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
     )
     st.plotly_chart(fig, use_container_width=True)
+
+    # Controls below chart in collapsible expander
+    with st.expander("⚙️ 차트 설정"):
+        c1, c2, c3 = st.columns([1, 2, 1.5])
+        with c1:
+            st.selectbox("조회 기간", list(PERIOD_DAYS.keys()), key='chart_period')
+        with c2:
+            st.multiselect("비교지수", ['서학(USD)', '서학(KRW)', '나스닥', 'S&P', '코스피'], key='chart_indices')
+        with c3:
+            st.multiselect("이동평균선", ['20일선', '60일선'], key='chart_ma')
 
 
 def render_report_and_rankings(df_weights, df_returns, chg_usd, ticker_map):
