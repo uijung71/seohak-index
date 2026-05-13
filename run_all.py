@@ -135,6 +135,28 @@ def generate_report(results, start_time):
     print(f"\n[REPORT GENERATED] {report_path}")
     return report_path
 
+def git_push():
+    """Auto-push updated data to GitHub for Streamlit Cloud deployment."""
+    print("\n>>> Running Git Auto-Push...")
+    try:
+        subprocess.run(["git", "add", "output/", "data/", "assets/"], cwd=str(BASE_DIR),
+                        capture_output=True, text=True, check=True)
+        result = subprocess.run(
+            ["git", "commit", "-m", f"auto: daily update {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}"],
+            cwd=str(BASE_DIR), capture_output=True, text=True
+        )
+        if result.returncode == 0:
+            subprocess.run(["git", "push", "origin", "main"], cwd=str(BASE_DIR),
+                            capture_output=True, text=True, check=True)
+            print("    [OK] Git push completed.")
+            return True
+        else:
+            print("    [SKIP] Nothing to commit.")
+            return True
+    except Exception as e:
+        print(f"    [WARN] Git push failed: {e}")
+        return False
+
 def main():
     start_time = datetime.datetime.now()
     scripts = [
@@ -143,7 +165,8 @@ def main():
         (SCRATCH_DIR / "update_fx.py", "FX Rate Update"),
         (SRC_DIR / "agent10_custody_health.py", "Custody Health Check"),
         (SRC_DIR / "agent9_live_weights.py", "Daily Weights Calculation"),
-        (SRC_DIR / "agent8_live_index.py", "Daily Index Calculation")
+        (SRC_DIR / "agent8_live_index.py", "Daily Index Calculation"),
+        (SRC_DIR / "generate_report.py", "AI Market Report"),
     ]
     
     results = []
@@ -151,7 +174,8 @@ def main():
         for path, name in scripts:
             success, output = run_script(path, name)
             results.append((name, success, output))
-            if not success:
+            # AI report failure is non-critical, don't halt pipeline
+            if not success and name != "AI Market Report":
                 print(f"\n[CRITICAL] Pipeline halted due to failure in {name}.")
                 break
     finally:
@@ -183,6 +207,9 @@ def main():
                         print(f"Chart generation or Telegram photo failed: {ce}")
             except Exception as e: 
                 print(f"Telegram report generation failed: {e}")
+            
+            # Git push to update GitHub → Streamlit Cloud
+            git_push()
 
 if __name__ == "__main__":
     main()
