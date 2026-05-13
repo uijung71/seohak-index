@@ -78,7 +78,7 @@ def inject_css():
         -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         margin-bottom: 25px !important; margin-top: 45px !important;
     }
-    .date-info { font-size: 1rem; color: #aaa; text-align: right; margin-bottom: -40px; padding-right: 15px; }
+    .date-info { font-size: 0.85rem; color: #888; text-align: right; margin-top: 8px; padding-right: 15px; }
 
     /* ── Custom Metric Cards (replaces st.metric) ──── */
     .metric-grid {
@@ -272,7 +272,6 @@ def render_header(last, prev, live_data):
     # Banner image
     if BANNER_FILE.exists():
         st.image(str(BANNER_FILE), use_container_width=True)
-    st.markdown(f'<div class="date-info">데이터 기준일: {last["date"].strftime("%Y-%m-%d")} | 업데이트: {datetime.now(KST).strftime("%Y-%m-%d %H:%M")}</div>', unsafe_allow_html=True)
 
     cards_html = '<div class="metric-grid">'
     cards_html += _metric_card_html(f"서학 USD ({date_str})", f"{last['index_point_usd']:,.0f}", f"{chg_usd:+.2f}%")
@@ -284,6 +283,7 @@ def render_header(last, prev, live_data):
         cards_html += _metric_card_html(f"{bm['name']} ({bm_date})", f"{val:,.0f}", d.get('delta', '-'))
     cards_html += '</div>'
     st.markdown(cards_html, unsafe_allow_html=True)
+    st.markdown(f'<div class="date-info">데이터 기준일: {last["date"].strftime("%Y-%m-%d")} | 업데이트: {datetime.now(KST).strftime("%Y-%m-%d %H:%M")}</div>', unsafe_allow_html=True)
 
 
 def render_chart(df_index, df_bench):
