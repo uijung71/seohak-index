@@ -431,7 +431,7 @@ def render_portfolio(df_weights, ticker_map):
     """Render portfolio composition pie chart and holdings table."""
     latest_date = df_weights['date'].max()
     st.markdown(
-        f'<div class="section-header">🍰 포트폴리오 구성 및 비중 '
+        f'<div class="section-header">📋 서학100 구성종목 '
         f'<span style="font-size:1.2rem; color:#888;">({latest_date.strftime("%Y-%m-%d")} 기준)</span></div>',
         unsafe_allow_html=True,
     )
@@ -441,6 +441,7 @@ def render_portfolio(df_weights, ticker_map):
 
     col_pie, col_table = st.columns([1, 1.2])
     with col_pie:
+        st.markdown('<div class="sub-title" style="font-size:1.1rem; margin-bottom:8px;">🍰 포트폴리오 구성</div>', unsafe_allow_html=True)
         sector_weights = latest.groupby('sector')['weight'].sum().reset_index()
         fig = px.pie(sector_weights, values='weight', names='sector', hole=0.6,
                      color_discrete_sequence=px.colors.qualitative.Bold)
@@ -448,6 +449,7 @@ def render_portfolio(df_weights, ticker_map):
         fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', margin=dict(t=10, b=10, l=10, r=10), height=PORTFOLIO_HEIGHT)
         st.plotly_chart(fig, use_container_width=True)
     with col_table:
+        st.markdown('<div class="sub-title" style="font-size:1.1rem; margin-bottom:8px;">🏆 보유비중 상위 TOP20</div>', unsafe_allow_html=True)
         top20 = latest.nlargest(20, 'weight')
         st.dataframe(
             top20[['ticker', '종목명', 'sector', 'weight']]
