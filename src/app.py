@@ -200,7 +200,9 @@ def get_live_indices():
     result = {}
     for bm in BENCHMARKS:
         try:
-            hist = yf.Ticker(bm['yf']).history(period="2d")
+            hist = yf.Ticker(bm['yf']).history(period="5d")
+            # Filter out rows with Close=0 (happens during market hours before data)
+            hist = hist[hist['Close'] > 0]
             if len(hist) >= 2:
                 curr, prev = hist['Close'].iloc[-1], hist['Close'].iloc[-2]
                 result[bm['name']] = {
@@ -208,6 +210,15 @@ def get_live_indices():
                     "delta": f"{calc_change_pct(curr, prev):+.2f}%",
                     "date": hist.index[-1].strftime('%m/%d'),
                 }
+            elif len(hist) == 1:
+                # Only 1 valid data point (e.g. after long holiday)
+                result[bm['name']] = {
+                    "val": hist['Close'].iloc[-1],
+                    "delta": "-",
+                    "date": hist.index[-1].strftime('%m/%d'),
+                }
+            else:
+                result[bm['name']] = {"val": 0, "delta": "-", "date": "-"}
         except Exception:
             result[bm['name']] = {"val": 0, "delta": "-", "date": "-"}
     return result
