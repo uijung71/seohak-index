@@ -257,16 +257,15 @@ def render_chart(df_index, df_bench):
     """Render performance comparison chart with MA overlays."""
     st.markdown('<div class="section-header">📈 지수 성과 비교 및 기술적 분석</div>', unsafe_allow_html=True)
 
-    # Row 1: Period + Index selection
-    c1, c2 = st.columns([1, 2.5])
+    # All controls in one row: Period | Indices | Moving Averages
+    c1, c2, c3 = st.columns([1, 2, 1.5])
     with c1:
-        period = st.selectbox("조회 기간", list(PERIOD_DAYS.keys()), label_visibility="collapsed")
+        period = st.selectbox("조회 기간", list(PERIOD_DAYS.keys()))
     with c2:
         indices = st.multiselect("비교지수", ['서학(USD)', '서학(KRW)', '나스닥', 'S&P', '코스피'],
-                                 default=['서학(USD)', '나스닥'], label_visibility="visible")
-
-    # Row 2: Moving average selection
-    ma_options = st.multiselect("이동평균선", ['20일선', '60일선'], default=[], label_visibility="visible")
+                                 default=['서학(USD)', '나스닥'])
+    with c3:
+        ma_options = st.multiselect("이동평균선", ['20일선', '60일선'], default=[])
 
     sw_usd = '서학(USD)' in indices
     sw_krw = '서학(KRW)' in indices
