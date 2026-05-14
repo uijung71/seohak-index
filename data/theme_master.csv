@@ -1,0 +1,398 @@
+﻿category,theme_id,theme_name,ticker,type,rank
+,4,ì¬ì´ë² ë³´ì,PANW,stock,1
+,4,ì¬ì´ë² ë³´ì,CRWD,stock,2
+,4,ì¬ì´ë² ë³´ì,FTNT,stock,3
+,4,ì¬ì´ë² ë³´ì,ZS,stock,4
+,4,ì¬ì´ë² ë³´ì,S,stock,5
+,4,ì¬ì´ë² ë³´ì,CIBR,etf,1
+,4,ì¬ì´ë² ë³´ì,BUG,etf,2
+,5,í´ë¼ì°ë & SW,MSFT,stock,1
+,5,í´ë¼ì°ë & SW,AMZN,stock,2
+,5,í´ë¼ì°ë & SW,ORCL,stock,3
+,5,í´ë¼ì°ë & SW,CRM,stock,4
+,5,í´ë¼ì°ë & SW,SNOW,stock,5
+,5,í´ë¼ì°ë & SW,SKYY,etf,1
+,5,í´ë¼ì°ë & SW,WCLD,etf,2
+,6,ëì§í¸ ê¸ìµ,V,stock,1
+,6,ëì§í¸ ê¸ìµ,ADYEY,stock,2
+,6,ëì§í¸ ê¸ìµ,INTU,stock,3
+,6,ëì§í¸ ê¸ìµ,NU,stock,4
+,6,ëì§í¸ ê¸ìµ,SOFI,stock,5
+,6,ëì§í¸ ê¸ìµ,FINX,etf,1
+,6,ëì§í¸ ê¸ìµ,IPAY,etf,2
+,7,ë¸ë¡ì²´ì¸,MSTR,stock,1
+,7,ë¸ë¡ì²´ì¸,COIN,stock,2
+,7,ë¸ë¡ì²´ì¸,CLSK,stock,3
+,7,ë¸ë¡ì²´ì¸,RIOT,stock,4
+,7,ë¸ë¡ì²´ì¸,CORZ,stock,5
+,7,ë¸ë¡ì²´ì¸,BLOK,etf,1
+,7,ë¸ë¡ì²´ì¸,BITQ,etf,2
+,8,ê²ì & ë©íë²ì¤,AAPL,stock,1
+,8,ê²ì & ë©íë²ì¤,META,stock,2
+,8,ê²ì & ë©íë²ì¤,RBLX,stock,3
+,8,ê²ì & ë©íë²ì¤,TTWO,stock,4
+,8,ê²ì & ë©íë²ì¤,U,stock,5
+,8,ê²ì & ë©íë²ì¤,HERO,etf,1
+,8,ê²ì & ë©íë²ì¤,METV,etf,2
+,9,AI ììµí,NOW,stock,1
+,9,AI ììµí,APP,stock,2
+,9,AI ììµí,ADBE,stock,3
+,9,AI ììµí,HUBS,stock,4
+,9,AI ììµí,MNDY,stock,5
+,9,AI ììµí,THNQ,etf,1
+,9,AI ììµí,IGV,etf,2
+,10,ìì ì»´í¨í°,IONQ,stock,1
+,10,ìì ì»´í¨í°,QBTS,stock,2
+,10,ìì ì»´í¨í°,KEYS,stock,3
+,10,ìì ì»´í¨í°,HON,stock,4
+,10,ìì ì»´í¨í°,LSCC,stock,5
+,10,ìì ì»´í¨í°,QTUM,etf,1
+,10,ìì ì»´í¨í°,WQTM,etf,2
+,11,ëì§í¸ í¸ì,SNPS,stock,1
+,11,ëì§í¸ í¸ì,IOT,stock,2
+,11,ëì§í¸ í¸ì,ADSK,stock,3
+,11,ëì§í¸ í¸ì,BSY,stock,4
+,11,ëì§í¸ í¸ì,PTC,stock,5
+,11,ëì§í¸ í¸ì,SNSR,etf,1
+,11,ëì§í¸ í¸ì,KOMP,etf,2
+,12,RWA í í°í,COIN,stock,1
+,12,RWA í í°í,ICE,stock,2
+,12,RWA í í°í,BLK,stock,3
+,12,RWA í í°í,WT,stock,4
+,12,RWA í í°í,HOOD,stock,5
+,12,RWA í í°í,BLOK,etf,1
+,12,RWA í í°í,BKCH,etf,2
+,13,AI ì£ì§ ëë°ì´ì¤,QCOM,stock,1
+,13,AI ì£ì§ ëë°ì´ì¤,DELL,stock,2
+,13,AI ì£ì§ ëë°ì´ì¤,AMD,stock,3
+,13,AI ì£ì§ ëë°ì´ì¤,NXPI,stock,4
+,13,AI ì£ì§ ëë°ì´ì¤,MU,stock,5
+,13,AI ì£ì§ ëë°ì´ì¤,SOXQ,etf,1
+,13,AI ì£ì§ ëë°ì´ì¤,XSD,etf,2
+,14,ë°ëì²´ í¨í¤ì§,AMAT,stock,1
+,14,ë°ëì²´ í¨í¤ì§,AMKR,stock,2
+,14,ë°ëì²´ í¨í¤ì§,ONTO,stock,3
+,14,ë°ëì²´ í¨í¤ì§,CAMT,stock,4
+,14,ë°ëì²´ í¨í¤ì§,LRCX,stock,5
+,14,ë°ëì²´ í¨í¤ì§,PSI,etf,1
+,14,ë°ëì²´ í¨í¤ì§,FTXL,etf,2
+,15,ì¤ë§í¸ ìí°,ITRI,stock,1
+,15,ì¤ë§í¸ ìí°,JCI,stock,2
+,15,ì¤ë§í¸ ìí°,TYL,stock,3
+,15,ì¤ë§í¸ ìí°,ROP,stock,4
+,15,ì¤ë§í¸ ìí°,EQIX,stock,5
+,15,ì¤ë§í¸ ìí°,GRID,etf,1
+,15,ì¤ë§í¸ ìí°,SIMS,etf,2
+,16,ë°ì´í° íë¼ì´ë²ì,VRNS,stock,1
+,16,ë°ì´í° íë¼ì´ë²ì,OKTA,stock,2
+,16,ë°ì´í° íë¼ì´ë²ì,CHKP,stock,3
+,16,ë°ì´í° íë¼ì´ë²ì,NET,stock,4
+,16,ë°ì´í° íë¼ì´ë²ì,RBRK,stock,5
+,16,ë°ì´í° íë¼ì´ë²ì,IHAK,etf,1
+,16,ë°ì´í° íë¼ì´ë²ì,HACK,etf,2
+,17,AI ê°ì ë¹ì,NICE,stock,1
+,17,AI ê°ì ë¹ì,FIVN,stock,2
+,17,AI ê°ì ë¹ì,CXM,stock,3
+,17,AI ê°ì ë¹ì,FRSH,stock,4
+,17,AI ê°ì ë¹ì,AI,stock,5
+,17,AI ê°ì ë¹ì,CHAT,etf,1
+,17,AI ê°ì ë¹ì,XSW,etf,2
+,18,ë°ëì²´ ì¤ê³ ìíí¸ì¨ì´,CDNS,stock,1
+,18,ë°ëì²´ ì¤ê³ ìíí¸ì¨ì´,PDFS,stock,2
+,18,ë°ëì²´ ì¤ê³ ìíí¸ì¨ì´,SVCO,stock,3
+,18,ë°ëì²´ ì¤ê³ ìíí¸ì¨ì´,LSCC,stock,4
+,18,ë°ëì²´ ì¤ê³ ìíí¸ì¨ì´,CEVA,stock,5
+,18,ë°ëì²´ ì¤ê³ ìíí¸ì¨ì´,RSPT,etf,1
+,18,ë°ëì²´ ì¤ê³ ìíí¸ì¨ì´,SMHX,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),19,ì°¨ì¸ë ììë ¥,CEG,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),19,ì°¨ì¸ë ììë ¥,CCJ,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),19,ì°¨ì¸ë ììë ¥,VST,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),19,ì°¨ì¸ë ììë ¥,OKLO,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),19,ì°¨ì¸ë ììë ¥,BWXT,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),19,ì°¨ì¸ë ììë ¥,URA,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),19,ì°¨ì¸ë ììë ¥,URNM,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),20,ì²­ì  ìëì§,FSLR,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),20,ì²­ì  ìëì§,NEE,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),20,ì²­ì  ìëì§,BEP,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),20,ì²­ì  ìëì§,GEV,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),20,ì²­ì  ìëì§,ENPH,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),20,ì²­ì  ìëì§,ICLN,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),20,ì²­ì  ìëì§,QCLN,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),21,ê¸°í ë³í,OXY,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),21,ê¸°í ë³í,ORA,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),21,ê¸°í ë³í,EMR,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),21,ê¸°í ë³í,PWR,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),21,ê¸°í ë³í,MORN,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),21,ê¸°í ë³í,KRBN,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),21,ê¸°í ë³í,ERTH,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),22,ì ë ¥ë§ ì¸íë¼,ETN,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),22,ì ë ¥ë§ ì¸íë¼,PWR,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),22,ì ë ¥ë§ ì¸íë¼,VRT,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),22,ì ë ¥ë§ ì¸íë¼,HUBB,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),22,ì ë ¥ë§ ì¸íë¼,AEP,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),22,ì ë ¥ë§ ì¸íë¼,POWR,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),22,ì ë ¥ë§ ì¸íë¼,XLU,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),23,êµ¬ë¦¬ / í¬í ë¥,FCX,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),23,êµ¬ë¦¬ / í¬í ë¥,SCCO,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),23,êµ¬ë¦¬ / í¬í ë¥,MP,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),23,êµ¬ë¦¬ / í¬í ë¥,TECK,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),23,êµ¬ë¦¬ / í¬í ë¥,ALB,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),23,êµ¬ë¦¬ / í¬í ë¥,COPX,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),23,êµ¬ë¦¬ / í¬í ë¥,REMX,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),24,ìì ê²½ì ,BE,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),24,ìì ê²½ì ,LIN,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),24,ìì ê²½ì ,PLUG,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),24,ìì ê²½ì ,APD,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),24,ìì ê²½ì ,BLDP,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),24,ìì ê²½ì ,HYDR,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),25,ë°ì´í°ì¼í° ì´ê´ë¦¬,MOD,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),25,ë°ì´í°ì¼í° ì´ê´ë¦¬,NVT,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),25,ë°ì´í°ì¼í° ì´ê´ë¦¬,SMCI,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),25,ë°ì´í°ì¼í° ì´ê´ë¦¬,TT,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),25,ë°ì´í°ì¼í° ì´ê´ë¦¬,CARR,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),25,ë°ì´í°ì¼í° ì´ê´ë¦¬,DTCR,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),25,ë°ì´í°ì¼í° ì´ê´ë¦¬,SRVR,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),26,ìí ê²½ì ,WM,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),26,ìí ê²½ì ,RSG,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),26,ìí ê²½ì ,CLH,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),26,ìí ê²½ì ,DAR,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),26,ìí ê²½ì ,PCT,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),26,ìí ê²½ì ,EVX,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),26,ìí ê²½ì ,EFRA,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),27,íë°°í°ë¦¬ ë¦¬ì¬ì´í´,ABAT,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),27,íë°°í°ë¦¬ ë¦¬ì¬ì´í´,ALB,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),27,íë°°í°ë¦¬ ë¦¬ì¬ì´í´,FCX,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),27,íë°°í°ë¦¬ ë¦¬ì¬ì´í´,MVST,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),27,íë°°í°ë¦¬ ë¦¬ì¬ì´í´,DFLI,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),27,íë°°í°ë¦¬ ë¦¬ì¬ì´í´,LIT,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),27,íë°°í°ë¦¬ ë¦¬ì¬ì´í´,BATT,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),28,ììì ì¸íë¼,XYL,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),28,ììì ì¸íë¼,PNR,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),28,ììì ì¸íë¼,BMI,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),28,ììì ì¸íë¼,WTRG,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),28,ììì ì¸íë¼,WTS,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),28,ììì ì¸íë¼,PHO,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),28,ììì ì¸íë¼,FIW,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),29,íê¸°ë¬¼ ê´ë¦¬,CWST,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),29,íê¸°ë¬¼ ê´ë¦¬,GFL,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),29,íê¸°ë¬¼ ê´ë¦¬,WCN,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),29,íê¸°ë¬¼ ê´ë¦¬,TTEK,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),29,íê¸°ë¬¼ ê´ë¦¬,MEG,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),29,íê¸°ë¬¼ ê´ë¦¬,IDU,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),29,íê¸°ë¬¼ ê´ë¦¬,XLI,etf,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),30,í´ì íë ¥,EQNR,stock,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),30,í´ì íë ¥,CDLR,stock,2
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),30,í´ì íë ¥,HLX,stock,3
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),30,í´ì íë ¥,STLD,stock,4
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),30,í´ì íë ¥,POWL,stock,5
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),30,í´ì íë ¥,FAN,etf,1
+ìëì§ ì£¼ê¶ & ì§êµ¬ì ë¯¸ë (Energy Transition),30,í´ì íë ¥,RNRG,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),31,ë°ì´ì¤ íì,VRTX,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),31,ë°ì´ì¤ íì,CRSP,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),31,ë°ì´ì¤ íì,NTLA,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),31,ë°ì´ì¤ íì,NTRA,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),31,ë°ì´ì¤ íì,BEAM,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),31,ë°ì´ì¤ íì,IBB,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),31,ë°ì´ì¤ íì,XBI,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),32,í¬ì¤ì¼ì´,BSX,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),32,í¬ì¤ì¼ì´,SYK,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),32,í¬ì¤ì¼ì´,LLY,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),32,í¬ì¤ì¼ì´,PODD,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),32,í¬ì¤ì¼ì´,DXCM,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),32,í¬ì¤ì¼ì´,XLV,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),32,í¬ì¤ì¼ì´,VHT,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),33,ë¤ì´ì´í¸ì½,AMGN,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),33,ë¤ì´ì´í¸ì½,VKTX,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),33,ë¤ì´ì´í¸ì½,GPCR,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),33,ë¤ì´ì´í¸ì½,ALT,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),33,ë¤ì´ì´í¸ì½,NVO,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),33,ë¤ì´ì´í¸ì½,OZEM,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),33,ë¤ì´ì´í¸ì½,HRTS,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),34,í­ë¸í,DNA,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),34,í­ë¸í,BIOA,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),34,í­ë¸í,LCTX,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),34,í­ë¸í,MGTX,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),34,í­ë¸í,GERN,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),34,í­ë¸í,IDNA,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),34,í­ë¸í,ARKG,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),35,ëì§í¸ í¬ì¤,DOCS,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),35,ëì§í¸ í¬ì¤,HIMS,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),35,ëì§í¸ í¬ì¤,TDOC,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),35,ëì§í¸ í¬ì¤,TALK,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),35,ëì§í¸ í¬ì¤,VEEV,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),35,ëì§í¸ í¬ì¤,HEAL,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),35,ëì§í¸ í¬ì¤,CHPS,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),36,ë§ë¦¬íë,TLRY,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),36,ë§ë¦¬íë,VFF,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),36,ë§ë¦¬íë,IIPR,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),36,ë§ë¦¬íë,TLRY,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),36,ë§ë¦¬íë,CRON,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),36,ë§ë¦¬íë,MSOS,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),36,ë§ë¦¬íë,MJ,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),37,ë°ì´ì¤ ìë°ë¬,AMGN,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),37,ë°ì´ì¤ ìë°ë¬,OGN,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),37,ë°ì´ì¤ ìë°ë¬,CHRS,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),37,ë°ì´ì¤ ìë°ë¬,LZAGY,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),37,ë°ì´ì¤ ìë°ë¬,ì¼ì±ë°ì´ì¤ë¡ì§ì¤,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),37,ë°ì´ì¤ ìë°ë¬,BBP,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),37,ë°ì´ì¤ ìë°ë¬,PBE,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),38,ê°ì ì© ë¡ë´,SERV,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),38,ê°ì ì© ë¡ë´,PATH,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),38,ê°ì ì© ë¡ë´,SN,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),38,ê°ì ì© ë¡ë´,SYM,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),38,ê°ì ì© ë¡ë´,ENVX,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),38,ê°ì ì© ë¡ë´,ROBT,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),38,ê°ì ì© ë¡ë´,BOTT,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),39,íµìµí© ìëì§,AMSC,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),39,íµìµí© ìëì§,VST,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),39,íµìµí© ìëì§,APD,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),39,íµìµí© ìëì§,AEIS,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),39,íµìµí© ìëì§,BWXT,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),39,íµìµí© ìëì§,URA,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),39,íµìµí© ìëì§,NLR,etf,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),40,ë§ì´í¬ë¡ LED,COHR,stock,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),40,ë§ì´í¬ë¡ LED,VUZI,stock,2
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),40,ë§ì´í¬ë¡ LED,LITE,stock,3
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),40,ë§ì´í¬ë¡ LED,KOPN,stock,4
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),40,ë§ì´í¬ë¡ LED,OLED,stock,5
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),40,ë§ì´í¬ë¡ LED,METV,etf,1
+ë°ì´ì¤ íëª & ì¸ë¥ì ì§í (Healthcare & Wellness),40,ë§ì´í¬ë¡ LED,LIT,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),41,ì°ì£¼ í­ê³µ & ë°©ì°,LMT,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),41,ì°ì£¼ í­ê³µ & ë°©ì°,RTX,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),41,ì°ì£¼ í­ê³µ & ë°©ì°,RDW,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),41,ì°ì£¼ í­ê³µ & ë°©ì°,KTOS,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),41,ì°ì£¼ í­ê³µ & ë°©ì°,GD,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),41,ì°ì£¼ í­ê³µ & ë°©ì°,ARKX,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),41,ì°ì£¼ í­ê³µ & ë°©ì°,PPA,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),42,ë¬¼ë¦¬ì  ì¸íë¼,CAT,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),42,ë¬¼ë¦¬ì  ì¸íë¼,URI,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),42,ë¬¼ë¦¬ì  ì¸íë¼,VMC,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),42,ë¬¼ë¦¬ì  ì¸íë¼,ETN,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),42,ë¬¼ë¦¬ì  ì¸íë¼,NUE,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),42,ë¬¼ë¦¬ì  ì¸íë¼,PAVE,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),42,ë¬¼ë¦¬ì  ì¸íë¼,IFRA,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),43,ìë²ë¦° AI,EQIX,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),43,ìë²ë¦° AI,SMCI,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),43,ìë²ë¦° AI,ARM,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),43,ìë²ë¦° AI,DLR,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),43,ìë²ë¦° AI,CSCO,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),43,ìë²ë¦° AI,XT,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),43,ìë²ë¦° AI,LOUP,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),44,ì°¨ì¸ë ëë¡,AVAV,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),44,ì°¨ì¸ë ëë¡,KTOS,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),44,ì°¨ì¸ë ëë¡,RCAT,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),44,ì°¨ì¸ë ëë¡,TXT,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),44,ì°¨ì¸ë ëë¡,ONDS,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),44,ì°¨ì¸ë ëë¡,DFEN,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),44,ì°¨ì¸ë ëë¡,ARKQ,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),45,ì°ì£¼ ê²½ì ,LUNR,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),45,ì°ì£¼ ê²½ì ,ASTS,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),45,ì°ì£¼ ê²½ì ,BKSY,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),45,ì°ì£¼ ê²½ì ,RKLB,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),45,ì°ì£¼ ê²½ì ,PL,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),45,ì°ì£¼ ê²½ì ,UFO,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),45,ì°ì£¼ ê²½ì ,ROKT,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),46,ë¦¬ì¼ì´ë§,EMR,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),46,ë¦¬ì¼ì´ë§,FAST,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),46,ë¦¬ì¼ì´ë§,PH,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),46,ë¦¬ì¼ì´ë§,TRMB,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),46,ë¦¬ì¼ì´ë§,STRL,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),46,ë¦¬ì¼ì´ë§,AIRR,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),46,ë¦¬ì¼ì´ë§,LRNZ,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),47,UAM,JOBY,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),47,UAM,ACHR,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),47,UAM,EVEX,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),47,UAM,EVTL,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),47,UAM,EH,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),47,UAM,KARS,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),47,UAM,HAIL,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),48,ì¬ì´ë² ë³´í,CB,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),48,ì¬ì´ë² ë³´í,TRV,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),48,ì¬ì´ë² ë³´í,GWRE,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),48,ì¬ì´ë² ë³´í,AKAM,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),48,ì¬ì´ë² ë³´í,MRSH,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),48,ì¬ì´ë² ë³´í,IAK,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),48,ì¬ì´ë² ë³´í,KIE,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),49,ì¸ê³µìì± íµì,GSAT,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),49,ì¸ê³µìì± íµì,IRDM,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),49,ì¸ê³µìì± íµì,VSAT,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),49,ì¸ê³µìì± íµì,SATS,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),49,ì¸ê³µìì± íµì,GILT,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),49,ì¸ê³µìì± íµì,IXP,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),49,ì¸ê³µìì± íµì,SRVR,etf,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),50,ì¬í´ ì±êµ´,TMC,stock,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),50,ì¬í´ ì±êµ´,OMEX,stock,2
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),50,ì¬í´ ì±êµ´,FTI,stock,3
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),50,ì¬í´ ì±êµ´,LZM,stock,4
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),50,ì¬í´ ì±êµ´,OII,stock,5
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),50,ì¬í´ ì±êµ´,PICK,etf,1
+ì ê³µê¸ë§ & êµ­ê° ìë³´ (Geopolitics & Infrastructure),50,ì¬í´ ì±êµ´,XME,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),51,ëì§í¸ ì»¤ë¨¸ì¤,MELI,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),51,ëì§í¸ ì»¤ë¨¸ì¤,GLBE,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),51,ëì§í¸ ì»¤ë¨¸ì¤,GCT,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),51,ëì§í¸ ì»¤ë¨¸ì¤,EXPE,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),51,ëì§í¸ ì»¤ë¨¸ì¤,SHOP,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),51,ëì§í¸ ì»¤ë¨¸ì¤,EBIZ,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),51,ëì§í¸ ì»¤ë¨¸ì¤,CLIX,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),52,ì ê¸°ì°¨ & ë°°í°ë¦¬,ALB,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),52,ì ê¸°ì°¨ & ë°°í°ë¦¬,QS,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),52,ì ê¸°ì°¨ & ë°°í°ë¦¬,RIVN,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),52,ì ê¸°ì°¨ & ë°°í°ë¦¬,TSLA,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),52,ì ê¸°ì°¨ & ë°°í°ë¦¬,1211,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),52,ì ê¸°ì°¨ & ë°°í°ë¦¬,DRIV,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),52,ì ê¸°ì°¨ & ë°°í°ë¦¬,IDRV,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),53,ë¸ëë ìë¹ì¬,WMT,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),53,ë¸ëë ìë¹ì¬,COST,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),53,ë¸ëë ìë¹ì¬,PG,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),53,ë¸ëë ìë¹ì¬,ULTA,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),53,ë¸ëë ìë¹ì¬,KO,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),53,ë¸ëë ìë¹ì¬,XLY,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),53,ë¸ëë ìë¹ì¬,VCR,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),54,ë¦¬ì¸  & ë¶ëì°,PLD,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),54,ë¦¬ì¸  & ë¶ëì°,AMT,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),54,ë¦¬ì¸  & ë¶ëì°,O,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),54,ë¦¬ì¸  & ë¶ëì°,WELL,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),54,ë¦¬ì¸  & ë¶ëì°,IRM,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),54,ë¦¬ì¸  & ë¶ëì°,VNQ,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),54,ë¦¬ì¸  & ë¶ëì°,XLRE,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),55,ììì¬ & ìì,XOM,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),55,ììì¬ & ìì,NEM,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),55,ììì¬ & ìì,CTVA,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),55,ììì¬ & ìì,NTRA,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),55,ììì¬ & ìì,FCX,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),55,ììì¬ & ìì,GNR,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),55,ììì¬ & ìì,GUNR,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),56,í« ì¼ì´,IDXX,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),56,í« ì¼ì´,ZTS,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),56,í« ì¼ì´,CHWY,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),56,í« ì¼ì´,FRPT,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),56,í« ì¼ì´,ELAN,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),56,í« ì¼ì´,PAWZ,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),56,í« ì¼ì´,IBUY,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),57,ë­ìë¦¬ ìë¹,RACE,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),57,ë­ìë¦¬ ìë¹,RL,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),57,ë­ìë¦¬ ìë¹,TPR,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),57,ë­ìë¦¬ ìë¹,EL,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),57,ë­ìë¦¬ ìë¹,GOOS,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),57,ë­ìë¦¬ ìë¹,LUXE,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),57,ë­ìë¦¬ ìë¹,GLUX,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),58,ì¤ë§í¸ ëì,DE,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),58,ì¤ë§í¸ ëì,CNH,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),58,ì¤ë§í¸ ëì,AGCO,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),58,ì¤ë§í¸ ëì,DAR,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),58,ì¤ë§í¸ ëì,VMI,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),58,ì¤ë§í¸ ëì,VEGI,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),58,ì¤ë§í¸ ëì,MOO,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),59,ì¤í¬ì¸  ë² í,DKNG,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),59,ì¤í¬ì¸  ë² í,FLUT,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),59,ì¤í¬ì¸  ë² í,MGM,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),59,ì¤í¬ì¸  ë² í,SRAD,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),59,ì¤í¬ì¸  ë² í,PENN,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),59,ì¤í¬ì¸  ë² í,BETZ,etf,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),59,ì¤í¬ì¸  ë² í,BJK,etf,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),60,ì¤ê³ ê±°ë,EBAY,stock,1
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),60,ì¤ê³ ê±°ë,REAL,stock,2
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),60,ì¤ê³ ê±°ë,ETSY,stock,3
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),60,ì¤ê³ ê±°ë,TDUP,stock,4
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),60,ì¤ê³ ê±°ë,PYPL,stock,5
+ë¯¸ë ìë¹ & ë¼ì´íì¤íì¼ (Future Lifestyle),60,ì¤ê³ ê±°ë,ONLN,etf,1
