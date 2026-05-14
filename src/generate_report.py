@@ -18,12 +18,16 @@ from google import genai
 load_dotenv()
 CLIENT = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-WEIGHTS_FILE = Path("data/processed/weights_daily_live.csv")
-RETURNS_FILE = Path("data/processed/daily_returns_live.csv")
-INDEX_FILE = Path("output/seohak100_daily_index.csv")
-TICKER_MAP_FILE = Path("data/processed/ticker_korean_map.csv")
-BENCHMARK_FILE = Path("data/raw/benchmark_indices.csv")
-REPORT_OUTPUT = Path("output/daily_report.json")
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+OUTPUT_DIR = BASE_DIR / "output"
+
+WEIGHTS_FILE = DATA_DIR / "processed" / "weights_daily_live.csv"
+RETURNS_FILE = DATA_DIR / "processed" / "daily_returns_live.csv"
+INDEX_FILE = OUTPUT_DIR / "seohak100_daily_index.csv"
+TICKER_MAP_FILE = DATA_DIR / "processed" / "ticker_korean_map.csv"
+BENCHMARK_FILE = DATA_DIR / "raw" / "benchmark_indices.csv"
+REPORT_OUTPUT = OUTPUT_DIR / "daily_report.json"
 
 MODEL_NAME = "gemini-2.5-flash"
 EODHD_API_KEY = "693abf5882dab9.42616862"

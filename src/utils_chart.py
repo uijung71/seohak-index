@@ -8,7 +8,8 @@ import matplotlib.dates as mdates
 
 # Configuration
 API_KEY = "693abf5882dab9.42616862"
-INDEX_FILE = Path("output/seohak100_daily_index.csv")
+BASE_DIR = Path(__file__).resolve().parent.parent
+INDEX_FILE = BASE_DIR / "output" / "seohak100_daily_index.csv"
 CHART_OUTPUT_DIR = Path(r"C:\Users\1\OneDrive\Documents\Drive Sync\Charts")
 CHART_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
