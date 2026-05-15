@@ -480,12 +480,22 @@ def render_composition_changes(ticker_map):
     col_text, col_chart = st.columns([1, 1.4])
     
     with col_text:
-        st.markdown(f'<div class="status-card" style="height:350px;">'
+        # Get rank shifts for display
+        rank_in = merged[(merged["weight_prev"] == 0) & (merged["weight_today"] > 0)]["ticker"].tolist()
+        rank_out = merged[(merged["weight_today"] == 0) & (merged["weight_prev"] > 0)]["ticker"].tolist()
+        
+        # Get actual rebalancing from AI report (if exists)
+        actual_in = ai_report.get('actual_in', []) if ai_report else []
+        actual_out = ai_report.get('actual_out', []) if ai_report else []
+        
+        st.markdown(f'<div class="status-card" style="height:380px; overflow-y:auto;">'
                     f'<div class="sub-title">🤖 AI 수급 이동 분석</div>'
-                    f'{comp_analysis}'
-                    f'<div class="sub-title" style="color:#00d4ff;">🆕 신규 진입 / 퇴출 종목</div>'
-                    f'<b>IN:</b> {", ".join(merged[(merged["weight_prev"] == 0) & (merged["weight_today"] > 0)]["ticker"].tolist()) or "-"}<br>'
-                    f'<b>OUT:</b> {", ".join(merged[(merged["weight_today"] == 0) & (merged["weight_prev"] > 0)]["ticker"].tolist()) or "-"}'
+                    f'<div style="font-size:0.9rem; margin-bottom:10px;">{comp_analysis}</div>'
+                    f'<hr style="margin:10px 0; border:0.5px solid #444;">'
+                    f'<div class="sub-title" style="color:#00d4ff; font-size:0.9rem;">📅 이번 주 공식 리밸런싱 (월요일)</div>'
+                    f'<div style="font-size:0.85rem;"><b>IN:</b> {", ".join(actual_in) or "없음"} / <b>OUT:</b> {", ".join(actual_out) or "없음"}</div>'
+                    f'<div class="sub-title" style="color:#ffae00; font-size:0.9rem; margin-top:10px;">🔍 실시간 100위권 변동 (수급 관찰)</div>'
+                    f'<div style="font-size:0.85rem;"><b>NEW:</b> {", ".join(rank_in[:5]) or "없음"} / <b>EXIT:</b> {", ".join(rank_out[:5]) or "없음"}</div>'
                     f'</div>', unsafe_allow_html=True)
 
     with col_chart:

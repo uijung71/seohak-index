@@ -77,29 +77,56 @@ def get_name(ticker, ticker_map):
 
 
 def analyze_composition_changes():
-    """Analyze weekly weight shifts and in/out stocks."""
+    """Analyze actual index component changes vs daily rank shifts."""
     HISTORY_FILE = DATA_DIR / "processed" / "weights_history_live.csv"
+    COMPONENTS_FILE = OUTPUT_DIR / "seohak100_components_since_202512.csv"
+    
     if not HISTORY_FILE.exists():
         return None
     
-    df = pd.read_csv(HISTORY_FILE)
-    dates = sorted(df['date'].unique(), reverse=True)
+    df_hist = pd.read_csv(HISTORY_FILE)
+    dates = sorted(df_hist['date'].unique(), reverse=True)
     if len(dates) < 2:
         return None
     
     today_date = dates[0]
-    # 7일 전과 가장 가까운 날짜 찾기
+    # 7일 전과 가장 가까운 날짜 찾기 (비중 변화 분석용)
     target_prev = (pd.to_datetime(today_date) - timedelta(days=7)).strftime('%Y-%m-%d')
     closest_prev = min(dates[1:], key=lambda x: abs(pd.to_datetime(x) - pd.to_datetime(target_prev)))
     prev_date = closest_prev
 
-    today_df = df[df['date'] == today_date]
-    prev_df = df[df['date'] == prev_date]
+    today_weights = df_hist[df_hist['date'] == today_date]
+    prev_weights = df_hist[df_hist['date'] == prev_date]
     
-    # 가중치 변화 계산
+    # 1. 실제 지수 구성 종목 변경 (Actual Rebalancing)
+    actual_in = []
+    actual_out = []
+    rebal_info = "정보 없음"
+    
+    if COMPONENTS_FILE.exists():
+        comp_df = pd.read_csv(COMPONENTS_FILE)
+        comp_df['date'] = pd.to_datetime(comp_df['date']).dt.strftime('%Y-%m-%d')
+        rebal_dates = sorted(comp_df['date'].unique(), reverse=True)
+        
+        if len(rebal_dates) >= 2:
+            latest_rebal_date = rebal_dates[0]
+            prev_rebal_date = rebal_dates[1]
+            
+            latest_members = set(comp_df[comp_df['date'] == latest_rebal_date]['ticker'].tolist())
+            prev_members = set(comp_df[comp_df['date'] == prev_rebal_date]['ticker'].tolist())
+            
+            actual_in = list(latest_members - prev_members)
+            actual_out = list(prev_members - latest_members)
+            
+            if today_date == latest_rebal_date:
+                rebal_info = f"금일({today_date}) 공식 리밸런싱 수행됨"
+            else:
+                rebal_info = f"최근 리밸런싱({latest_rebal_date}) 결과 유지 중"
+
+    # 2. 가중치 및 순위권 변화 (Rank Shifts / Market Sentiment)
     merged = pd.merge(
-        today_df[['ticker', 'weight']], 
-        prev_df[['ticker', 'weight']], 
+        today_weights[['ticker', 'weight']], 
+        prev_weights[['ticker', 'weight']], 
         on='ticker', 
         how='outer', 
         suffixes=('_today', '_prev')
@@ -109,21 +136,24 @@ def analyze_composition_changes():
     top_gainers = merged.sort_values('diff', ascending=False).head(5)
     top_losers = merged.sort_values('diff', ascending=True).head(5)
     
-    # 신규 진입/퇴출
-    in_stocks = merged[(merged['weight_prev'] == 0) & (merged['weight_today'] > 0)]['ticker'].tolist()
-    out_stocks = merged[(merged['weight_today'] == 0) & (merged['weight_prev'] > 0)]['ticker'].tolist()
+    # 100위권 진입/이탈 (이것은 실제 지수 편입과 다를 수 있음)
+    rank_in = merged[(merged['weight_prev'] == 0) & (merged['weight_today'] > 0)]['ticker'].tolist()
+    rank_out = merged[(merged['weight_today'] == 0) & (merged['weight_prev'] > 0)]['ticker'].tolist()
     
     return {
         'today': today_date,
         'prev': prev_date,
+        'rebal_info': rebal_info,
         'gainers': top_gainers.to_dict('records'),
         'losers': top_losers.to_dict('records'),
-        'in': in_stocks,
-        'out': out_stocks
+        'actual_in': actual_in,
+        'actual_out': actual_out,
+        'rank_in': rank_in,
+        'rank_out': rank_out
     }
 
 
-def build_prompt(index_data, top5, top10_up, top10_down, chg_pct, ticker_map, composition_text):
+def build_prompt(index_data, top5, top10_up, top10_down, chg_pct, ticker_map, comp_data):
     """Build the prompt with today's market data and weight shifts."""
 
     top5_text = ""
@@ -144,49 +174,47 @@ def build_prompt(index_data, top5, top10_up, top10_down, chg_pct, ticker_map, co
         ret = row['daily_return'] * 100
         down_text += f"  - {name} ({row['ticker']}): {ret:+.2f}%\n"
 
-    direction = "상승" if chg_pct >= 0 else "하락"
+    # Composition text handling
+    if comp_data:
+        actual_in_text = ", ".join(comp_data['actual_in']) if comp_data['actual_in'] else "없음"
+        actual_out_text = ", ".join(comp_data['actual_out']) if comp_data['actual_out'] else "없음"
+        rank_in_text = ", ".join(comp_data['rank_in'][:10]) if comp_data['rank_in'] else "없음"
+        rank_out_text = ", ".join(comp_data['rank_out'][:10]) if comp_data['rank_out'] else "없음"
+        rebal_info = comp_data.get('rebal_info', '정보 없음')
+    else:
+        actual_in_text = actual_out_text = rank_in_text = rank_out_text = "데이터 부족"
+        rebal_info = "데이터 부족"
 
     prompt = f"""당신은 서학 100 지수(한국 투자자들의 해외주식 보유 상위 100종목 기반 지수)의 전문 시장 분석가입니다.
 아래 오늘의 시장 데이터와 비중 변화 데이터를 바탕으로, 한국어로 전문적인 일일 시장 분석 리포트를 작성하세요.
 
-=== 오늘의 데이터 ({datetime.now().strftime('%Y-%m-%d')}) ===
-서학 100 지수 변동률: {chg_pct:+.2f}% ({direction})
-
-▶ 보유 비중 상위 5종목 및 당일 수익률:
+### 1. 지수 성과
+- 서학 100 지수: {index_data['index_point_usd']:.2f} pt ({chg_pct:+.2f}%)
+- 당일 지수 영향력 상위 종목:
 {top5_text}
-▶ 당일 상승률 TOP 10:
+
+### 2. 주간 포트폴리오 비중 변화 (최근 7일 대비)
+- **비중 크게 증가:**
 {up_text}
-▶ 당일 하락률 TOP 10:
+- **비중 크게 감소:**
 {down_text}
 
-=== 주간 비중 및 수급 변화 (최근 7일 내외) ===
-{composition_text}
+### 3. 지수 구성 종목 변경 현황 (공식 리밸런싱 - v5.2 규칙)
+*참고: 리밸런싱은 매주 월요일에만 발생하며, 2주 연속 90위 이내(진입) 또는 110위 밖(퇴출) 조건을 충족해야 합니다.*
+- **현재 상태:** {rebal_info}
+- **공식 신규 편입 (IN):** {actual_in_text}
+- **공식 지수 편출 (OUT):** {actual_out_text}
 
-=== 작성 규칙 ===
-1. 반드시 아래 5개 섹션으로 구성하세요:
-   - "headline": 한 줄 헤드라인 (지수 방향성과 핵심 동인을 포함, 30자 내외)
-   - "summary": 시장 흐름 요약 (2~3문장, 지수 변동률을 언급하고, 주요 상승/하락 원인을 구체적으로 분석)
-   - "composition_analysis": **가장 중요** 비중 변화 분석 (3~4문장, 비중이 크게 늘거나 줄어든 종목, 신규 진입/퇴출 종목을 바탕으로 한국 투자자들의 수급 트렌드를 전문적으로 해석)
-   - "top5_reasons": 상위 5종목 각각의 등락 사유 (종목별 1문장, 구체적인 이유 포함)
-   - "outlook": 향후 전망 (1~2문장, 당일 흐름을 바탕으로 한 단기 전망)
+### 4. 실시간 수급 모니터링 (100위권 순위 변동 - 지수 종목과 무관할 수 있음)
+*순위권에는 진입했으나 아직 2주 대기 조건을 채우지 못한 '예비 후보군' 성격의 종목들입니다.*
+- **100위권 신규 포착:** {rank_in_text}
+- **100위권 이탈:** {rank_out_text}
 
-2. 반드시 아래 JSON 형식으로만 응답하세요 (다른 텍스트 없이):
-{{
-  "headline": "...",
-  "summary": "...",
-  "composition_analysis": "...",
-  "top5_reasons": {{
-    "TICKER1": "사유...",
-    "TICKER2": "사유...",
-    "TICKER3": "사유...",
-    "TICKER4": "사유...",
-    "TICKER5": "사유..."
-  }},
-  "outlook": "..."
-}}
-
-3. 추상적이거나 일반적인 표현은 금지합니다. 반드시 데이터에 기반한 구체적인 분석을 하세요.
-4. 전문 금융 미디어 수준의 격식 있는 한국어를 사용하세요.
+### 리포트 작성 가이드라인:
+- **[중요]** '공식 리밸런싱'과 '단순 순위 변동'을 엄격히 구분하여 분석하세요. 
+- 애플(AAPL), AMD 등이 단순히 순위가 100위 밖으로 밀려났더라도, 공식 리밸런싱(월요일)에서 퇴출되지 않았다면 "지수에서 퇴출되었다"고 표현해서는 안 됩니다. 대신 "수급 순위가 하락하며 다음 리밸런싱의 퇴출 후보군에 올랐다"는 식으로 전문적으로 설명하세요.
+- 지수 편출입 종목이 있다면 한국 투자자들의 투자 심리 변화와 연계하여 설명하세요.
+- 반드시 JSON 형식으로만 응답하세요. (키: headline, summary, composition_analysis, top5_reasons, outlook)
 """
     return prompt
 
@@ -233,22 +261,9 @@ def generate_report():
 
     # 비중 변화 데이터 추출
     comp_data = analyze_composition_changes()
-    composition_text = "비중 변화 데이터가 아직 충분하지 않습니다."
-    if comp_data:
-        composition_text = f"비교 기간: {comp_data['prev']} -> {comp_data['today']}\n"
-        composition_text += "- 비중 증가 상위:\n"
-        for item in comp_data['gainers']:
-            composition_text += f"  * {get_name(item['ticker'], ticker_map)}: {item['weight_prev']*100:.2f}% -> {item['weight_today']*100:.2f}% ({item['diff']*100:+.3f}%p)\n"
-        composition_text += "- 비중 감소 상위:\n"
-        for item in comp_data['losers']:
-            composition_text += f"  * {get_name(item['ticker'], ticker_map)}: {item['weight_prev']*100:.2f}% -> {item['weight_today']*100:.2f}% ({item['diff']*100:+.3f}%p)\n"
-        if comp_data['in']:
-            composition_text += f"- 신규 진입: {', '.join(comp_data['in'])}\n"
-        if comp_data['out']:
-            composition_text += f"- 퇴출 종목: {', '.join(comp_data['out'])}\n"
 
     # Build prompt and call Gemini
-    prompt = build_prompt(df_index, top5, top10_up, top10_down, chg_pct, ticker_map, composition_text)
+    prompt = build_prompt(last, top5, top10_up, top10_down, chg_pct, ticker_map, comp_data)
 
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Gemini API 호출 중...")
     response = CLIENT.models.generate_content(model=MODEL_NAME, contents=prompt)

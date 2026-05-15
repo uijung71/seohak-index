@@ -84,6 +84,29 @@ def generate_tg_report(results, start_time):
                 status_ko = {"ACTIVE": "정상 수집", "NEVER_COLLECTED": "미수집", "DEFUNCT_CANDIDATE": "이탈 후보"}.get(status, status)
                 msg.append(f"- {status_ko}: {count}개 종목")
         except: pass
+    
+    # [NEW] 데이터 품질 및 복구 현황 추가
+    VAL_FILE = OUTPUT_DIR / "data_validation_report.json"
+    if VAL_FILE.exists():
+        try:
+            with open(VAL_FILE, "r", encoding="utf-8") as f:
+                v = json.load(f)
+            
+            status_icon = "🟢" if v['status'] == 'NORMAL' else "🟡"
+            msg.append(f"\n🛠 *데이터 품질 및 복구 현황*")
+            msg.append(f"- 최종 상태: {status_icon} {v['status']}")
+            msg.append(f"- 수집 통계: 1차 성공({v['success_1st']}), 재시도 복구({v['recovered_count']}), 추정치 대체({v['estimated_count']})")
+            
+            if v['recovered_list']:
+                # 상위 10개만 표시
+                rec_text = ", ".join([f"{item['ticker']}({item['attempts']}차)" for item in v['recovered_list'][:10]])
+                msg.append(f"- ✅ 복구 완료: {rec_text}")
+            
+            if v['estimated_list']:
+                # 상위 10개만 표시
+                est_text = ", ".join(v['estimated_list'][:10])
+                msg.append(f"- ⚠️ 추정치 사용: {est_text} (전일 데이터 적용)")
+        except: pass
 
     return "\n".join(msg)
 

@@ -193,20 +193,61 @@ def run_pipeline():
     custody_results = []
     trading_results = []
     
-    def fetch_isin_data(i, isin, row):
-        # 1. 보관금액 (가장 최신일 기준 하나만)
-        c_url = f"{OPEN_URL}?key={OPEN_KEY}&apiId=getSecnFrsecCusInfo&params=STD_DT:{target_dt},ISIN:{isin}"
-        amt = 0.0
+    # [NEW] Load previous data for fallback
+    prev_custody_map = {}
+    if (RAW_DIR / "custody_daily.csv").exists():
         try:
-            c_resp = requests.get(c_url, headers=HEADERS, timeout=10)
-            if c_resp.status_code == 200:
-                root = ET.fromstring(c_resp.text)
-                for res in root.findall(".//result"):
-                    if res.find("NATION_CD").attrib.get("value") == "US":
-                        amt = float(res.find("FRSEC_TOT_HOLD_AMT").attrib.get("value", "0"))
-                        break
+            prev_df = pd.read_csv(RAW_DIR / "custody_daily.csv")
+            prev_custody_map = prev_df.set_index('isin')['amount'].to_dict()
         except: pass
+
+    # [NEW] Track retry statistics
+    stats = {
+        'total': len(isin_list),
+        'success_1st': 0,
+        'recovered': [], # list of (ticker, attempt)
+        'estimated': [], # list of ticker
+    }
+
+    def fetch_isin_data(i, isin, row):
+        # 1. 보관금액 (재시도 로직 포함)
+        amt = 0.0
+        success = False
+        attempts = 0
+        max_retries = 3
+        intervals = [5, 10, 20] # seconds
+
+        while attempts <= max_retries:
+            c_url = f"{OPEN_URL}?key={OPEN_KEY}&apiId=getSecnFrsecCusInfo&params=STD_DT:{target_dt},ISIN:{isin}"
+            try:
+                c_resp = requests.get(c_url, headers=HEADERS, timeout=10)
+                if c_resp.status_code == 200:
+                    root = ET.fromstring(c_resp.text)
+                    for res in root.findall(".//result"):
+                        if res.find("NATION_CD").attrib.get("value") == "US":
+                            amt = float(res.find("FRSEC_TOT_HOLD_AMT").attrib.get("value", "0"))
+                            if amt > 0:
+                                success = True
+                                break
+            except: pass
+            
+            if success: break
+            
+            # Retry if failed or amt is 0
+            if attempts < max_retries:
+                time.sleep(intervals[attempts])
+                attempts += 1
+            else:
+                break
         
+        # [Fallback] If still 0, use T-1
+        is_estimated = False
+        if not success:
+            old_val = prev_custody_map.get(isin, 0.0)
+            if old_val > 0:
+                amt = old_val
+                is_estimated = True
+
         # 2. 매매현황 (최근 5거래일 합산)
         total_buy, total_sell = 0.0, 0.0
         valid_days = 0
@@ -232,11 +273,11 @@ def run_pipeline():
             except: pass
         
         return i, {
-            'isin': isin, 'ticker': row['ticker'], 'name_en': row['name_en'], 'amount': amt, 'date': target_dt
+            'isin': isin, 'ticker': row['ticker'], 'name_en': row['name_en'], 'amount': amt, 'date': target_dt, 
+            'is_estimated': is_estimated, 'attempts': attempts
         }, {
             'isin': isin, 'ticker': row['ticker'], 'name_en': row['name_en'], 'buy': total_buy, 'sell': total_sell, 'net_buy': total_buy - total_sell, 'date': target_dt
         }
-
     custody_results_map = {}
     trading_results_map = {}
     
@@ -257,12 +298,39 @@ def run_pipeline():
     custody_results = [custody_results_map[i] for i in range(len(isin_list))]
     trading_results = [trading_results_map[i] for i in range(len(isin_list))]
 
-    # 5. 저장
-    fmt_dt = f"{target_dt[:4]}-{target_dt[4:6]}-{target_dt[6:8]}"
-    
+    # 5. 데이터 검증 및 결과 집계
+    print("\n[4] 데이터 무결성 검증 및 복구 결과 집계...")
     cust_df = pd.DataFrame(custody_results).assign(date=fmt_dt)
     trad_df = pd.DataFrame(trading_results).assign(date=fmt_dt)
     
+    # 통계 계산
+    s_1st = len(cust_df[(cust_df['attempts'] == 0) & (cust_df['amount'] > 0) & (~cust_df['is_estimated'])])
+    recovered = cust_df[(cust_df['attempts'] > 0) & (cust_df['amount'] > 0) & (~cust_df['is_estimated'])]
+    estimated = cust_df[cust_df['is_estimated']]
+    
+    validation_report = {
+        'target_date': fmt_dt,
+        'total_count': len(cust_df),
+        'success_1st': int(s_1st),
+        'recovered_count': len(recovered),
+        'recovered_list': recovered[['ticker', 'attempts']].to_dict('records'),
+        'estimated_count': len(estimated),
+        'estimated_list': estimated['ticker'].tolist(),
+        'status': 'NORMAL' if len(estimated) == 0 else 'ESTIMATED'
+    }
+    
+    # JSON 저장 (run_all.py에서 사용)
+    VAL_FILE = OUTPUT_DIR / "data_validation_report.json"
+    with open(VAL_FILE, "w", encoding="utf-8") as f:
+        json.dump(validation_report, f, ensure_ascii=False, indent=2)
+
+    print(f"  - 1차 성공: {s_1st}개")
+    if len(recovered) > 0:
+        print(f"  - 재시도 복구: {len(recovered)}개 ({', '.join(recovered['ticker'].tolist())})")
+    if len(estimated) > 0:
+        print(f"  - 추정치(T-1) 대체: {len(estimated)}개 ({', '.join(estimated['ticker'].tolist())})")
+
+    # 6. 저장
     # 최신 데이터 업데이트 (Master)
     cust_df.to_csv(RAW_DIR / "custody_daily.csv", index=False, encoding="utf-8-sig")
     trad_df.to_csv(RAW_DIR / "trading_daily.csv", index=False, encoding="utf-8-sig")
@@ -272,7 +340,7 @@ def run_pipeline():
     cust_df.to_csv(SNAP_DIR / f"custody_{snap_dt}.csv", index=False, encoding="utf-8-sig")
     trad_df.to_csv(SNAP_DIR / f"trading_{snap_dt}.csv", index=False, encoding="utf-8-sig")
     
-    print(f"\n[DONE] 파이프라인 완료. 기준일: {fmt_dt} (스냅샷 저장 완료)")
+    print(f"\n[DONE] 파이프라인 완료. 기준일: {fmt_dt} (검증 리포트 생성 완료)")
 
 if __name__ == "__main__":
     run_pipeline()
