@@ -21,6 +21,7 @@ UNIVERSE_FILE = PROC_DIR / "ticker_universe.csv"
 CUSTODY_FILE = RAW_DIR / "custody_daily.csv"
 COMPONENTS_FILE = OUTPUT_DIR / "seohak100_components_since_202512.csv"
 WEIGHTS_DAILY = PROC_DIR / "weights_daily_live.csv"
+WEIGHTS_HISTORY = PROC_DIR / "weights_history_live.csv"
 RANK_HISTORY = PROC_DIR / "rank_history_live.csv"
 
 def is_leveraged_etf(ticker, name):
@@ -165,10 +166,22 @@ def run_weight_generation():
     
     top100.to_csv(WEIGHTS_DAILY, index=False, encoding="utf-8-sig")
 
+    # 7. 누적 저장 (Archiving)
+    if WEIGHTS_HISTORY.exists():
+        history_df = pd.read_csv(WEIGHTS_HISTORY)
+        history_df = history_df[history_df['date'] != fmt_date]
+        history_df = pd.concat([history_df, top100], ignore_index=True)
+        history_df = history_df.sort_values(by=['date', 'rank'], ascending=[False, True])
+        # 유지 기간 관리 (최근 100일 스냅샷 정도면 충분)
+        history_df = history_df[history_df['date'] >= (pd.to_datetime(fmt_date) - pd.Timedelta(days=100)).strftime('%Y-%m-%d')]
+        history_df.to_csv(WEIGHTS_HISTORY, index=False, encoding="utf-8-sig")
+    else:
+        top100.to_csv(WEIGHTS_HISTORY, index=False, encoding="utf-8-sig")
+
     print(f"  [SUCCESS] v5.2 일간 가중치 산출 완료 ({fmt_date})")
     print(f"  - 종목 수: {len(top100)}")
     print(f"  - 레버리지 ETF 비중: {leveraged_etf_weight*100:.2f}%")
-    print(f"  - 저장 위치: {WEIGHTS_DAILY}")
+    print(f"  - 저장 위치: {WEIGHTS_DAILY} (History Updated)")
 
 if __name__ == "__main__":
     run_weight_generation()

@@ -32,6 +32,7 @@ WEIGHTS_FILE = Path("data/processed/weights_daily_live.csv")
 RETURNS_FILE = Path("data/processed/daily_returns_live.csv")
 BENCHMARK_FILE = Path("data/raw/benchmark_indices.csv")
 REPORT_FILE = Path("output/daily_report.json")
+WEIGHTS_HISTORY = Path("data/processed/weights_history_live.csv")
 TICKER_MAP_FILE = Path("data/processed/ticker_korean_map.csv")
 
 # ── Period Mapping ─────────────────────────────────────────────
@@ -440,6 +441,74 @@ def render_report_and_rankings(df_weights, df_returns, chg_usd, ticker_map):
                          height=TABLE_HEIGHT, hide_index=True, use_container_width=True)
 
 
+def render_composition_changes(ticker_map):
+    """Render weekly weight shift analysis section."""
+    if not WEIGHTS_HISTORY.exists():
+        return
+
+    st.markdown('<div class="section-header">📊 주간 비중 변동 및 수급 분석</div>', unsafe_allow_html=True)
+    
+    df = pd.read_csv(WEIGHTS_HISTORY)
+    dates = sorted(df['date'].unique(), reverse=True)
+    if len(dates) < 2:
+        st.info("비중 변화 분석을 위한 데이터가 부족합니다. (내일부터 비교 데이터가 표시됩니다)")
+        return
+
+    today_date = dates[0]
+    # Find closest date to 7 days ago
+    target_prev = (pd.to_datetime(today_date) - timedelta(days=7)).strftime('%Y-%m-%d')
+    closest_prev = min(dates[1:], key=lambda x: abs(pd.to_datetime(x) - pd.to_datetime(target_prev)))
+    
+    today_df = df[df['date'] == today_date]
+    prev_df = df[df['date'] == closest_prev]
+
+    merged = pd.merge(
+        today_df[['ticker', 'weight']], 
+        prev_df[['ticker', 'weight']], 
+        on='ticker', 
+        how='outer', 
+        suffixes=('_today', '_prev')
+    ).fillna(0)
+    
+    merged['diff'] = (merged['weight_today'] - merged['weight_prev']) * 100
+    merged['종목명'] = merged['ticker'].apply(lambda t: get_korean_name(t, ticker_map))
+    
+    # AI Report Analysis
+    ai_report = load_ai_report()
+    comp_analysis = ai_report.get('composition_analysis', 'AI 분석 리포트를 생성 중입니다.') if ai_report else '데이터 수집 중...'
+
+    col_text, col_chart = st.columns([1, 1.4])
+    
+    with col_text:
+        st.markdown(f'<div class="status-card" style="height:350px;">'
+                    f'<div class="sub-title">🤖 AI 수급 이동 분석</div>'
+                    f'{comp_analysis}'
+                    f'<div class="sub-title" style="color:#00d4ff;">🆕 신규 진입 / 퇴출 종목</div>'
+                    f'<b>IN:</b> {", ".join(merged[(merged["weight_prev"] == 0) & (merged["weight_today"] > 0)]["ticker"].tolist()) or "-"}<br>'
+                    f'<b>OUT:</b> {", ".join(merged[(merged["weight_today"] == 0) & (merged["weight_prev"] > 0)]["ticker"].tolist()) or "-"}'
+                    f'</div>', unsafe_allow_html=True)
+
+    with col_chart:
+        # Diverging Bar Chart for Top 10 Changes
+        # Show both gainers and losers
+        gainers = merged[merged['diff'] > 0].nlargest(5, 'diff')
+        losers = merged[merged['diff'] < 0].nsmallest(5, 'diff')
+        top_changes = pd.concat([gainers, losers]).sort_values('diff')
+        
+        if not top_changes.empty:
+            fig = px.bar(top_changes, x='diff', y='ticker', orientation='h',
+                         title=f'주간 비중 증감 TOP 10 (%p, {closest_prev} 대비)',
+                         color='diff', color_continuous_scale='RdBu_r',
+                         text_auto='.3f', hover_data=['종목명'])
+            fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                              height=350, margin=dict(t=40, b=10, l=10, r=10),
+                              coloraxis_showscale=False,
+                              font=dict(color="#e0e0e0"))
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("비중 변화가 있는 종목이 없습니다.")
+
+
 def render_portfolio(df_weights, ticker_map):
     """Render portfolio composition pie chart and holdings table."""
     latest_date = df_weights['date'].max()
@@ -503,6 +572,7 @@ def main():
     render_chart(df_index, df_bench)
     if not df_returns.empty and not df_weights.empty:
         render_report_and_rankings(df_weights, df_returns, chg_usd, ticker_map)
+        render_composition_changes(ticker_map)
     if not df_weights.empty:
         render_portfolio(df_weights, ticker_map)
 
