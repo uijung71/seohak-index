@@ -157,10 +157,14 @@ def build_prompt(index_data, top5, top10_up, top10_down, chg_pct, ticker_map, co
     """Build the prompt with today's market data and weight shifts."""
 
     top5_text = ""
+    top5_info = []
     for _, row in top5.iterrows():
         name = get_name(row['ticker'], ticker_map)
         ret = row.get('daily_return', 0) * 100
         top5_text += f"  - {name} ({row['ticker']}): {ret:+.2f}%\n"
+        top5_info.append(f"{name}({row['ticker']})")
+
+    top5_tickers_str = ", ".join(top5_info)
 
     up_text = ""
     for _, row in top10_up.iterrows():
@@ -210,11 +214,13 @@ def build_prompt(index_data, top5, top10_up, top10_down, chg_pct, ticker_map, co
 - **100위권 신규 포착:** {rank_in_text}
 - **100위권 이탈:** {rank_out_text}
 
-### 리포트 작성 가이드라인:
-- **[중요]** '공식 리밸런싱'과 '단순 순위 변동'을 엄격히 구분하여 분석하세요. 
-- 애플(AAPL), AMD 등이 단순히 순위가 100위 밖으로 밀려났더라도, 공식 리밸런싱(월요일)에서 퇴출되지 않았다면 "지수에서 퇴출되었다"고 표현해서는 안 됩니다. 대신 "수급 순위가 하락하며 다음 리밸런싱의 퇴출 후보군에 올랐다"는 식으로 전문적으로 설명하세요.
-- 지수 편출입 종목이 있다면 한국 투자자들의 투자 심리 변화와 연계하여 설명하세요.
-- 반드시 JSON 형식으로만 응답하세요. (키: headline, summary, composition_analysis, top5_reasons, outlook)
+- 반드시 JSON 형식으로만 응답하세요.
+- 키 설명:
+    - headline: 리포트 제목
+    - summary: 전체 시장 요약 (1단락)
+    - composition_analysis: **[중요]** 지수 리밸런싱 및 수급 분석. 공식 리밸런싱(월요일)과 단순 순위 변동을 엄격히 구분하세요. 애플(AAPL) 등이 순위가 밀려도 공식 리밸런싱 전까지는 "퇴출"이라 표현하지 말고 "퇴출 후보" 등으로 설명해야 합니다.
+    - top5_reasons: **반드시 딕셔너리 형식**이어야 하며, 키는 다음 5개 티커({", ".join(top5['ticker'].tolist())})여야 합니다. 값은 해당 종목의 오늘 변동 원인에 대한 전문적인 설명입니다.
+    - outlook: 향후 전망 및 투자 전략
 """
     return prompt
 
